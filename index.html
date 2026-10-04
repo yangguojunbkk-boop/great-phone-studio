@@ -1,0 +1,895 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+<title>伟大的手机 · 用手机，选伟大</title>
+<meta name="description" content="伟大的手机工作室 —— 温暖手作感的手机贩卖铺。用手机，选伟大。" />
+<link rel="preconnect" href="https://fonts.googleapis.com" />
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+<link href="https://fonts.googleapis.com/css2?family=Ma+Shan+Zheng&family=Noto+Serif+SC:wght@400;500;600;700&family=ZCOOL+XiaoWei&display=swap" rel="stylesheet" />
+<style>
+/* ============ 设计变量 ============ */
+:root {
+  --cream:      #f7f1e4;   /* 页面底色 */
+  --cream-2:    #fdfaf2;   /* 卡片底色 */
+  --cream-3:    #f1e7d3;   /* 深一阶奶油 */
+  --ink:        #3f2e1e;   /* 主墨色·深棕 */
+  --ink-2:      #6d533a;   /* 次级棕 */
+  --ink-3:      #9c8163;   /* 弱化棕 */
+  --caramel:    #c08a54;   /* 焦糖 */
+  --terra:      #bf5f38;   /* 陶土橘·强调色 */
+  --seal:       #b03a26;   /* 印章红 */
+  --sand:       #e6d8bf;   /* 边框沙色 */
+  --shadow:     62, 44, 26; /* 阴影基色 rgb */
+
+  --font-hand: "Ma Shan Zheng", "Kaiti SC", "STKaiti", "KaiTi", cursive;
+  --font-body: "Noto Serif SC", "Songti SC", serif;
+  --font-xiao: "ZCOOL XiaoWei", "Noto Serif SC", serif;
+
+  --radius: 26px;
+  --maxw: 1120px;
+}
+
+* { margin: 0; padding: 0; box-sizing: border-box; }
+
+html { scroll-behavior: smooth; }
+
+body {
+  background: var(--cream);
+  color: var(--ink);
+  font-family: var(--font-body);
+  line-height: 1.9;
+  overflow-x: hidden;
+}
+
+::selection { background: var(--caramel); color: #fff8ec; }
+
+/* 纸张颗粒纹理 */
+.grain {
+  position: fixed; inset: 0;
+  pointer-events: none;
+  z-index: 999;
+  opacity: .5;
+  mix-blend-mode: multiply;
+  background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='140' height='140'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='2'/%3E%3CfeColorMatrix type='saturate' values='0'/%3E%3C/filter%3E%3Crect width='140' height='140' filter='url(%23n)' opacity='0.06'/%3E%3C/svg%3E");
+}
+
+/* ============ 顶部导航 ============ */
+nav {
+  position: fixed; top: 0; left: 0; right: 0;
+  z-index: 100;
+  display: flex; align-items: center; justify-content: space-between;
+  padding: 18px clamp(20px, 5vw, 48px);
+  transition: all .4s ease;
+}
+nav.scrolled {
+  background: rgba(253, 250, 242, .88);
+  backdrop-filter: blur(12px);
+  box-shadow: 0 1px 0 var(--sand), 0 10px 30px rgba(var(--shadow), .06);
+  padding-top: 12px; padding-bottom: 12px;
+}
+.brand {
+  font-family: var(--font-hand);
+  font-size: 26px;
+  color: var(--ink);
+  text-decoration: none;
+  display: flex; align-items: center; gap: 10px;
+}
+.brand .dot {
+  width: 30px; height: 30px; border-radius: 50%;
+  background: var(--seal); color: #fdf3e3;
+  display: grid; place-items: center;
+  font-size: 17px;
+  transform: rotate(-8deg);
+  box-shadow: 0 3px 8px rgba(var(--shadow), .25);
+}
+.nav-links { display: flex; gap: 6px; }
+.nav-links a {
+  font-family: var(--font-xiao);
+  font-size: 15.5px;
+  color: var(--ink-2);
+  text-decoration: none;
+  padding: 6px 14px;
+  border-radius: 999px;
+  transition: all .25s;
+}
+.nav-links a:hover { background: var(--cream-3); color: var(--ink); }
+@media (max-width: 760px) { .nav-links { display: none; } }
+
+/* ============ 首屏 ============ */
+.hero {
+  position: relative;
+  min-height: 100svh;
+  display: flex; align-items: center; justify-content: center;
+  text-align: center;
+  padding: 120px 24px 140px;
+  overflow: hidden;
+  background:
+    radial-gradient(900px 520px at 85% -10%, rgba(192, 138, 84, .18), transparent 60%),
+    radial-gradient(700px 500px at 8% 110%, rgba(191, 95, 56, .12), transparent 60%),
+    var(--cream);
+}
+.hero-inner { position: relative; z-index: 3; max-width: 780px; }
+
+.hero-badge {
+  display: inline-flex; align-items: center; gap: 8px;
+  font-family: var(--font-xiao);
+  font-size: 14px; letter-spacing: 4px;
+  color: var(--ink-2);
+  border: 1.5px dashed var(--caramel);
+  border-radius: 999px;
+  padding: 7px 20px;
+  background: rgba(253, 250, 242, .7);
+  margin-bottom: 26px;
+}
+.hero-badge::before, .hero-badge::after {
+  content: "✦"; color: var(--caramel); font-size: 11px;
+}
+
+.hero h1 {
+  font-family: var(--font-hand);
+  font-weight: 400;
+  font-size: clamp(64px, 12vw, 128px);
+  line-height: 1.12;
+  letter-spacing: .04em;
+  color: var(--ink);
+  text-shadow: 0 2px 0 rgba(255, 255, 255, .6);
+  animation: rise .9s .1s cubic-bezier(.2,.8,.2,1) both;
+}
+.hero h1 .accent { color: var(--terra); position: relative; display: inline-block; }
+.hero h1 .accent::after {
+  content: "";
+  position: absolute; left: 4%; right: 4%; bottom: .06em;
+  height: .16em;
+  background: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='120' height='12' viewBox='0 0 120 12'%3E%3Cpath d='M2 8 Q 16 2 30 7 T 60 7 T 90 7 T 118 6' fill='none' stroke='%23c08a54' stroke-width='4' stroke-linecap='round'/%3E%3C/svg%3E") no-repeat center / 100% 100%;
+}
+
+.hero-slogan {
+  margin-top: 18px;
+  font-family: var(--font-xiao);
+  font-size: clamp(19px, 3vw, 25px);
+  letter-spacing: .38em;
+  text-indent: .38em;
+  color: var(--ink-2);
+  animation: rise .9s .28s cubic-bezier(.2,.8,.2,1) both;
+}
+
+.hero-sub {
+  margin-top: 14px;
+  font-size: 15px;
+  color: var(--ink-3);
+  animation: rise .9s .4s cubic-bezier(.2,.8,.2,1) both;
+}
+
+.hero-cta {
+  margin-top: 40px;
+  display: flex; gap: 18px; justify-content: center; flex-wrap: wrap;
+  animation: rise .9s .52s cubic-bezier(.2,.8,.2,1) both;
+}
+.btn {
+  font-family: var(--font-xiao);
+  font-size: 17px; letter-spacing: 3px; text-indent: 3px;
+  text-decoration: none;
+  padding: 15px 42px;
+  border-radius: 999px;
+  transition: transform .25s cubic-bezier(.2,.8,.2,1), box-shadow .25s;
+  display: inline-block;
+}
+.btn:active { transform: scale(.96); }
+.btn-primary {
+  color: #fff8ec;
+  background: linear-gradient(140deg, #cf7a4b, var(--terra) 55%, #a94e2c);
+  box-shadow: 0 12px 26px rgba(191, 95, 56, .35), inset 0 1px 0 rgba(255,255,255,.25);
+}
+.btn-primary:hover { transform: translateY(-3px); box-shadow: 0 18px 34px rgba(191,95,56,.42), inset 0 1px 0 rgba(255,255,255,.25); }
+.btn-ghost {
+  color: var(--ink-2);
+  border: 1.5px solid var(--ink-3);
+  background: rgba(253, 250, 242, .55);
+}
+.btn-ghost:hover { background: var(--cream-2); color: var(--ink); transform: translateY(-3px); }
+
+/* 首屏漂浮手机装饰 */
+.hero-deco { position: absolute; inset: 0; pointer-events: none; z-index: 1; }
+.mini-phone {
+  position: absolute;
+  width: 64px; height: 128px;
+  border-radius: 18px;
+  border: 2px solid rgba(63, 46, 30, .55);
+  background: rgba(253, 250, 242, .8);
+  box-shadow: 0 14px 30px rgba(var(--shadow), .14);
+  animation: float 7s ease-in-out infinite;
+}
+.mini-phone::before {
+  content: ""; position: absolute; top: 8px; left: 50%;
+  transform: translateX(-50%);
+  width: 18px; height: 5px; border-radius: 99px;
+  background: rgba(63,46,30,.35);
+}
+.mini-phone::after {
+  content: ""; position: absolute; left: 8px; right: 8px; bottom: 8px; top: 26px;
+  border-radius: 10px;
+}
+.mp-1 { top: 16%; left: 7%;  transform: rotate(-14deg); }
+.mp-1::after { background: linear-gradient(160deg, #e8cfa8, #c08a54); }
+.mp-2 { top: 58%; left: 12%; transform: rotate(10deg);  animation-delay: -2.4s; width: 52px; height: 104px; }
+.mp-2::after { background: linear-gradient(160deg, #f2ddc0, #d8a878); }
+.mp-3 { top: 20%; right: 8%; transform: rotate(13deg);  animation-delay: -1.2s; }
+.mp-3::after { background: linear-gradient(160deg, #e3b49a, #bf5f38); }
+.mp-4 { top: 62%; right: 10%; transform: rotate(-9deg); animation-delay: -3.6s; width: 56px; height: 112px; }
+.mp-4::after { background: linear-gradient(160deg, #d8c6a6, #9c8163); }
+
+/* 旋转贴纸 */
+.sticker {
+  position: absolute;
+  z-index: 4;
+  width: 118px; height: 118px;
+  right: clamp(16px, 9vw, 130px); bottom: 12%;
+  animation: spinSlow 22s linear infinite;
+  filter: drop-shadow(0 10px 18px rgba(var(--shadow), .25));
+}
+@media (max-width: 700px) {
+  .sticker { display: none; }
+  .seal { display: none; }
+  .mini-phone { opacity: .8; }
+  .mp-1 { top: 4%;  left: 4%;  width: 48px; height: 96px; }
+  .mp-2 { top: auto; bottom: 26%; left: 5%;  width: 42px; height: 84px; }
+  .mp-3 { top: 6%;  right: 5%; width: 50px; height: 100px; }
+  .mp-4 { top: auto; bottom: 30%; right: 6%; width: 44px; height: 88px; }
+}
+
+/* 印章 */
+.seal {
+  position: absolute; z-index: 4;
+  width: 66px; height: 66px;
+  border: 3px solid var(--seal);
+  border-radius: 12px;
+  color: var(--seal);
+  font-family: var(--font-hand);
+  font-size: 27px; line-height: 1.15;
+  display: grid; place-items: center;
+  transform: rotate(9deg);
+  left: clamp(16px, 9vw, 140px); top: 24%;
+  box-shadow: inset 0 0 0 2px rgba(176, 58, 38, .25);
+  opacity: .9;
+  animation: rise 1s .7s both;
+}
+@media (max-width: 700px) { .seal { display: none; } }
+
+/* 底部波浪分隔 */
+.wave-divider { position: absolute; left: 0; right: 0; bottom: -2px; z-index: 2; }
+.wave-divider svg { display: block; width: 100%; height: 90px; }
+
+/* ============ 通用区块 ============ */
+section { padding: clamp(80px, 11vw, 130px) 24px; position: relative; }
+.wrap { max-width: var(--maxw); margin: 0 auto; }
+
+.sec-head { text-align: center; margin-bottom: clamp(44px, 6vw, 70px); }
+.sec-eyebrow {
+  font-family: var(--font-xiao);
+  font-size: 14px; letter-spacing: 6px; text-indent: 6px;
+  color: var(--caramel);
+  margin-bottom: 8px;
+}
+.sec-title {
+  font-family: var(--font-hand);
+  font-weight: 400;
+  font-size: clamp(38px, 6vw, 54px);
+  letter-spacing: .06em;
+}
+.sec-title .tilt { display: inline-block; transform: rotate(-4deg); color: var(--terra); }
+.sec-desc { max-width: 560px; margin: 14px auto 0; color: var(--ink-2); font-size: 15.5px; }
+
+/* 滚动显现 */
+.reveal { opacity: 0; transform: translateY(36px); transition: opacity .8s ease, transform .8s cubic-bezier(.2,.8,.2,1); }
+.reveal.in { opacity: 1; transform: none; }
+
+/* ============ 招牌产品 ============ */
+#menu {
+  background: linear-gradient(var(--cream-3), var(--cream) 30%);
+}
+.cards {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+  gap: 34px;
+}
+.card {
+  background: var(--cream-2);
+  border: 1.5px solid var(--sand);
+  border-radius: var(--radius);
+  padding: 18px 18px 26px;
+  position: relative;
+  box-shadow: 0 14px 34px rgba(var(--shadow), .08);
+  transition: transform .35s cubic-bezier(.2,.8,.2,1), box-shadow .35s;
+}
+.card:hover {
+  transform: translateY(-8px) rotate(-.4deg);
+  box-shadow: 0 26px 48px rgba(var(--shadow), .14);
+}
+.card:nth-child(even) { transform: rotate(.6deg); }
+.card:nth-child(even):hover { transform: translateY(-8px) rotate(.2deg); }
+.card:nth-child(odd)  { transform: rotate(-.6deg); }
+.card:nth-child(odd):hover { transform: translateY(-8px) rotate(-.2deg); }
+
+/* 拍立得胶带 */
+.card::before {
+  content: "";
+  position: absolute; top: -13px; left: 50%;
+  transform: translateX(-50%) rotate(-3deg);
+  width: 92px; height: 26px;
+  background: rgba(208, 176, 130, .5);
+  border-left: 1px dashed rgba(255,255,255,.6);
+  border-right: 1px dashed rgba(255,255,255,.6);
+  z-index: 2;
+}
+
+.card-img {
+  height: 210px;
+  border-radius: 18px;
+  display: grid; place-items: center;
+  position: relative;
+  overflow: hidden;
+  border: 1px solid rgba(63,46,30,.08);
+}
+.card-img .ph-label {
+  position: absolute; bottom: 10px; right: 14px;
+  font-size: 11px; letter-spacing: 2px;
+  color: rgba(63,46,30,.45);
+  font-family: var(--font-xiao);
+}
+.card-img svg { width: 84px; height: 148px; filter: drop-shadow(0 10px 16px rgba(var(--shadow), .22)); transition: transform .4s; }
+.card:hover .card-img svg { transform: translateY(-6px) scale(1.04) rotate(-2deg); }
+
+.img-1 { background: linear-gradient(150deg, #f4e6cc, #e6cba0); }
+.img-2 { background: linear-gradient(150deg, #eed9be, #d3a172); }
+.img-3 { background: linear-gradient(150deg, #f6dfc4, #e0a678); }
+.img-4 { background: linear-gradient(150deg, #e9d6ba, #b98a5e); }
+.img-5 { background: linear-gradient(150deg, #e7d2c2, #c98a66); }
+.img-6 { background: linear-gradient(150deg, #f0e6d2, #cbb68f); }
+
+.card-body { padding: 20px 8px 0; }
+.card-top { display: flex; align-items: baseline; justify-content: space-between; gap: 12px; }
+.card-name { font-family: var(--font-hand); font-size: 27px; letter-spacing: .05em; }
+.card-tag {
+  font-size: 11px; letter-spacing: 2px;
+  color: var(--terra);
+  border: 1px solid rgba(191,95,56,.4);
+  padding: 2px 10px; border-radius: 99px;
+  white-space: nowrap;
+}
+.card-price {
+  font-family: var(--font-xiao);
+  font-size: 22px;
+  color: var(--caramel);
+  margin-top: 2px;
+}
+.card-price small { font-size: 13px; color: var(--ink-3); margin-right: 2px; }
+.card-desc { margin-top: 8px; font-size: 14.5px; color: var(--ink-2); }
+
+.menu-note {
+  text-align: center;
+  margin-top: 52px;
+  font-size: 14px; color: var(--ink-3);
+  font-family: var(--font-xiao);
+  letter-spacing: 2px;
+}
+.menu-note b { color: var(--terra); font-weight: 400; }
+
+/* ============ 关于我们 ============ */
+.about-grid {
+  display: grid;
+  grid-template-columns: 1.05fr .95fr;
+  gap: clamp(40px, 6vw, 80px);
+  align-items: center;
+}
+@media (max-width: 880px) { .about-grid { grid-template-columns: 1fr; } }
+
+.about-text h3 {
+  font-family: var(--font-hand);
+  font-weight: 400;
+  font-size: clamp(28px, 4vw, 38px);
+  line-height: 1.5;
+  margin-bottom: 22px;
+}
+.about-text h3 em { font-style: normal; color: var(--terra); }
+.about-text p { color: var(--ink-2); font-size: 15.5px; margin-bottom: 16px; }
+
+.quote {
+  margin-top: 28px;
+  padding: 22px 26px;
+  background: var(--cream-2);
+  border-left: 4px solid var(--caramel);
+  border-radius: 0 18px 18px 0;
+  box-shadow: 0 10px 24px rgba(var(--shadow), .07);
+}
+.quote .q { font-family: var(--font-hand); font-size: 21px; color: var(--ink); }
+.quote .who { margin-top: 8px; font-size: 13px; color: var(--ink-3); letter-spacing: 2px; }
+
+.about-photo {
+  position: relative;
+  background: var(--cream-2);
+  border: 1.5px solid var(--sand);
+  border-radius: var(--radius);
+  padding: 16px;
+  transform: rotate(1.6deg);
+  box-shadow: 0 22px 46px rgba(var(--shadow), .14);
+}
+.about-photo .ph {
+  height: 380px;
+  border-radius: 16px;
+  background:
+    radial-gradient(300px 180px at 70% 20%, rgba(255, 244, 220, .9), transparent 70%),
+    linear-gradient(160deg, #eadbbf 0%, #d9bd92 55%, #c39a68 100%);
+  display: grid; place-items: center;
+  position: relative; overflow: hidden;
+}
+.about-photo .ph::before {
+  content: "";
+  position: absolute; inset: 0;
+  background:
+    linear-gradient(rgba(63,46,30,.06) 1px, transparent 1px),
+    linear-gradient(90deg, rgba(63,46,30,.06) 1px, transparent 1px);
+  background-size: 34px 34px;
+  mask-image: radial-gradient(70% 70% at 50% 50%, #000 30%, transparent 100%);
+}
+.about-photo .ph-center { text-align: center; position: relative; color: rgba(63,46,30,.55); }
+.about-photo .ph-center .icon { font-size: 44px; display: block; margin-bottom: 8px; }
+.about-photo .ph-center .txt { font-family: var(--font-xiao); letter-spacing: 4px; font-size: 14px; }
+.about-photo .caption {
+  padding: 14px 8px 4px;
+  text-align: center;
+  font-family: var(--font-hand);
+  font-size: 19px;
+  color: var(--ink-2);
+}
+.about-photo .tape {
+  position: absolute; top: -14px; left: 50%;
+  transform: translateX(-50%) rotate(2deg);
+  width: 120px; height: 30px;
+  background: rgba(208, 176, 130, .55);
+  border-left: 1px dashed rgba(255,255,255,.6);
+  border-right: 1px dashed rgba(255,255,255,.6);
+  z-index: 2;
+}
+
+/* ============ 顾客好评 ============ */
+#reviews { background: linear-gradient(var(--cream), var(--cream-3)); }
+.review-cards {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(290px, 1fr));
+  gap: 32px;
+}
+.review {
+  background: var(--cream-2);
+  border: 1.5px solid var(--sand);
+  border-radius: var(--radius);
+  padding: 30px 28px;
+  position: relative;
+  box-shadow: 0 14px 34px rgba(var(--shadow), .08);
+  transition: transform .35s cubic-bezier(.2,.8,.2,1);
+}
+.review:hover { transform: translateY(-6px) rotate(-.4deg); }
+.review .quote-mark {
+  position: absolute; top: 14px; right: 22px;
+  font-family: var(--font-hand);
+  font-size: 64px; line-height: 1;
+  color: rgba(192, 138, 84, .3);
+}
+.stars { color: #d9922f; font-size: 18px; letter-spacing: 4px; margin-bottom: 14px; }
+.stars .off { color: rgba(63,46,30,.18); }
+.review-text { font-size: 15px; color: var(--ink-2); min-height: 90px; }
+.reviewer { display: flex; align-items: center; gap: 14px; margin-top: 22px; }
+.avatar {
+  width: 48px; height: 48px; border-radius: 50%;
+  display: grid; place-items: center;
+  font-family: var(--font-hand);
+  font-size: 22px; color: #fff8ec;
+  box-shadow: inset 0 -3px 6px rgba(0,0,0,.12), 0 6px 14px rgba(var(--shadow), .18);
+}
+.av-1 { background: linear-gradient(150deg, #cf7a4b, #a94e2c); }
+.av-2 { background: linear-gradient(150deg, #c08a54, #8f6234); }
+.av-3 { background: linear-gradient(150deg, #9c8163, #6d533a); }
+.reviewer .name { font-weight: 600; font-size: 15px; }
+.reviewer .meta { font-size: 12.5px; color: var(--ink-3); letter-spacing: 1px; }
+
+/* ============ 联系与地址 ============ */
+.contact-grid {
+  display: grid;
+  grid-template-columns: 1fr 1.1fr;
+  gap: clamp(36px, 5vw, 64px);
+  align-items: stretch;
+}
+@media (max-width: 880px) { .contact-grid { grid-template-columns: 1fr; } }
+
+.info-list { display: grid; gap: 22px; align-content: start; }
+.info-item {
+  display: flex; gap: 18px;
+  background: var(--cream-2);
+  border: 1.5px solid var(--sand);
+  border-radius: 20px;
+  padding: 20px 24px;
+  box-shadow: 0 10px 26px rgba(var(--shadow), .07);
+  transition: transform .3s;
+}
+.info-item:hover { transform: translateX(6px); }
+.info-item .ico {
+  flex: 0 0 46px; height: 46px;
+  border-radius: 14px;
+  background: linear-gradient(150deg, var(--cream-3), #e3cfa9);
+  display: grid; place-items: center;
+  font-size: 21px;
+  border: 1px solid var(--sand);
+}
+.info-item .label { font-family: var(--font-xiao); font-size: 13px; letter-spacing: 3px; color: var(--ink-3); }
+.info-item .val { font-size: 15.5px; color: var(--ink); margin-top: 2px; }
+.info-item .val b { color: var(--terra); font-weight: 600; }
+
+.map-ph {
+  position: relative;
+  min-height: 380px;
+  border-radius: var(--radius);
+  border: 2px dashed rgba(156, 129, 99, .55);
+  background:
+    linear-gradient(rgba(63,46,30,.05) 1px, transparent 1px),
+    linear-gradient(90deg, rgba(63,46,30,.05) 1px, transparent 1px),
+    linear-gradient(160deg, #f3ead7, #e9dcc2);
+  background-size: 40px 40px, 40px 40px, cover;
+  display: grid; place-items: center;
+  overflow: hidden;
+}
+.map-ph .roads {
+  position: absolute; inset: 0;
+  opacity: .5;
+}
+.map-ph .roads::before, .map-ph .roads::after {
+  content: "";
+  position: absolute; background: rgba(253, 250, 242, .9);
+  box-shadow: 0 0 0 1px rgba(63,46,30,.08);
+}
+.map-ph .roads::before { left: 22%; top: -10%; bottom: -10%; width: 26px; transform: rotate(8deg); }
+.map-ph .roads::after { top: 30%; left: -10%; right: -10%; height: 22px; transform: rotate(-4deg); }
+.map-center { position: relative; text-align: center; z-index: 2; }
+.map-pin {
+  width: 54px; height: 54px; margin: 0 auto 12px;
+  border-radius: 50% 50% 50% 0;
+  transform: rotate(-45deg) translateY(6px);
+  background: linear-gradient(150deg, #cf7a4b, var(--terra));
+  box-shadow: 0 12px 22px rgba(191, 95, 56, .4);
+  display: grid; place-items: center;
+  animation: bounce 2.4s ease-in-out infinite;
+}
+.map-pin::after {
+  content: ""; width: 16px; height: 16px; border-radius: 50%;
+  background: #fff3e0;
+  transform: rotate(45deg);
+}
+.map-center .txt { font-family: var(--font-xiao); letter-spacing: 4px; color: var(--ink-2); font-size: 15px; }
+.map-center .sub { font-size: 12.5px; color: var(--ink-3); margin-top: 4px; letter-spacing: 2px; }
+
+/* ============ 页脚 ============ */
+footer {
+  background: var(--ink);
+  color: #d8c6ab;
+  text-align: center;
+  padding: 56px 24px 44px;
+  position: relative;
+}
+footer .f-brand { font-family: var(--font-hand); font-size: 30px; color: #f3e7d0; }
+footer .f-slogan { font-family: var(--font-xiao); letter-spacing: 5px; margin-top: 6px; font-size: 14px; color: #b99e7c; }
+footer .f-line { width: 46px; height: 1px; background: #6d533a; margin: 20px auto; }
+footer .f-note { font-size: 12.5px; color: #8f7454; letter-spacing: 1px; }
+
+/* ============ 动画 ============ */
+@keyframes rise { from { opacity: 0; transform: translateY(30px); } to { opacity: 1; transform: none; } }
+@keyframes float { 0%,100% { translate: 0 0; } 50% { translate: 0 -16px; } }
+@keyframes spinSlow { to { rotate: 360deg; } }
+@keyframes bounce { 0%,100% { translate: 0 0; } 50% { translate: 0 -9px; } }
+
+@media (prefers-reduced-motion: reduce) {
+  *, *::before, *::after { animation: none !important; transition: none !important; }
+  .reveal { opacity: 1; transform: none; }
+}
+</style>
+</head>
+<body>
+
+<div class="grain" aria-hidden="true"></div>
+
+<!-- 导航 -->
+<nav id="nav">
+  <a class="brand" href="#top"><span class="dot">偉</span>伟大的手机</a>
+  <div class="nav-links">
+    <a href="#menu">招牌产品</a>
+    <a href="#about">关于我们</a>
+    <a href="#reviews">顾客好评</a>
+    <a href="#contact">联系与地址</a>
+  </div>
+</nav>
+
+<!-- 首屏 -->
+<header class="hero" id="top">
+  <div class="hero-deco" aria-hidden="true">
+    <div class="mini-phone mp-1"></div>
+    <div class="mini-phone mp-2"></div>
+    <div class="mini-phone mp-3"></div>
+    <div class="mini-phone mp-4"></div>
+  </div>
+  <div class="seal" aria-hidden="true">偉大</div>
+
+  <div class="hero-inner">
+    <div class="hero-badge">手机贩售 · 小小工作室</div>
+    <h1>伟大的<span class="accent">手机</span></h1>
+    <p class="hero-slogan">用手机，选伟大</p>
+    <p class="hero-sub">每一部手机，都值得被认真挑选 —— 就像挑选一位长期陪伴的朋友。</p>
+    <div class="hero-cta">
+      <a class="btn btn-primary" href="#menu">查看菜单</a>
+      <a class="btn btn-ghost" href="#about">我们的故事</a>
+    </div>
+  </div>
+
+  <!-- 旋转贴纸 -->
+  <svg class="sticker" viewBox="0 0 120 120" aria-hidden="true">
+    <defs>
+      <path id="circlePath" d="M 60,60 m -42,0 a 42,42 0 1,1 84,0 a 42,42 0 1,1 -84,0" />
+    </defs>
+    <circle cx="60" cy="60" r="56" fill="#bf5f38" />
+    <circle cx="60" cy="60" r="50" fill="none" stroke="#fdf3e3" stroke-width="1.6" stroke-dasharray="3 5" />
+    <text fill="#fdf3e3" font-size="12.5" letter-spacing="3.4" font-family="Georgia, serif">
+      <textPath href="#circlePath">GREAT PHONE STUDIO · 偉大的手機 ·</textPath>
+    </text>
+    <text x="60" y="67" text-anchor="middle" fill="#fdf3e3" font-size="21" font-family="Georgia, serif">✆</text>
+  </svg>
+
+  <div class="wave-divider" aria-hidden="true">
+    <svg viewBox="0 0 1440 90" preserveAspectRatio="none">
+      <path d="M0,50 C240,90 420,10 720,45 C1020,80 1200,15 1440,50 L1440,90 L0,90 Z" fill="#f1e7d3"/>
+    </svg>
+  </div>
+</header>
+
+<main>
+  <!-- 招牌产品 -->
+  <section id="menu">
+    <div class="wrap">
+      <div class="sec-head reveal">
+        <p class="sec-eyebrow">SIGNATURE · 招牌产品</p>
+        <h2 class="sec-title">本季<span class="tilt">人气</span>六款</h2>
+        <p class="sec-desc">像命名一款甜点一样，我们为每部手机起了名字。它们各有脾气，但都足够可靠。</p>
+      </div>
+
+      <div class="cards">
+        <article class="card reveal">
+          <div class="card-img img-1">
+            <svg viewBox="0 0 84 148"><rect x="3" y="3" width="78" height="142" rx="16" fill="#fbf5e9" stroke="#3f2e1e" stroke-width="3"/><rect x="10" y="12" width="64" height="112" rx="9" fill="#efe2c8"/><rect x="30" y="22" width="24" height="7" rx="3.5" fill="#3f2e1e" opacity=".7"/><circle cx="42" cy="70" r="14" fill="#d9b888" stroke="#3f2e1e" stroke-width="2.5"/><rect x="28" y="130" width="28" height="5" rx="2.5" fill="#3f2e1e" opacity=".6"/></svg>
+            <span class="ph-label">图片占位</span>
+          </div>
+          <div class="card-body">
+            <div class="card-top"><h3 class="card-name">晨雾</h3><span class="card-tag">轻薄入门</span></div>
+            <p class="card-price"><small>¥</small>2,999</p>
+            <p class="card-desc">米白磨砂机身，轻若无物。清晨出门，它是最不添负担的那一位。</p>
+          </div>
+        </article>
+
+        <article class="card reveal">
+          <div class="card-img img-2">
+            <svg viewBox="0 0 84 148"><rect x="3" y="3" width="78" height="142" rx="16" fill="#8f6234" stroke="#3f2e1e" stroke-width="3"/><rect x="10" y="12" width="64" height="112" rx="9" fill="#a97a48"/><rect x="30" y="22" width="24" height="7" rx="3.5" fill="#3f2e1e" opacity=".7"/><circle cx="42" cy="70" r="14" fill="#6d4a26" stroke="#3f2e1e" stroke-width="2.5"/><rect x="28" y="130" width="28" height="5" rx="2.5" fill="#3f2e1e" opacity=".6"/></svg>
+            <span class="ph-label">图片占位</span>
+          </div>
+          <div class="card-body">
+            <div class="card-top"><h3 class="card-name">褐糖</h3><span class="card-tag">人气热卖</span></div>
+            <p class="card-price"><small>¥</small>3,499</p>
+            <p class="card-desc">焦糖棕植鞣革背盖，越用越亮。像一颗含在口袋里的太妃糖。</p>
+          </div>
+        </article>
+
+        <article class="card reveal">
+          <div class="card-img img-3">
+            <svg viewBox="0 0 84 148"><rect x="3" y="3" width="78" height="142" rx="16" fill="#e8a874" stroke="#3f2e1e" stroke-width="3"/><rect x="10" y="12" width="64" height="112" rx="9" fill="#f0bf92"/><rect x="30" y="22" width="24" height="7" rx="3.5" fill="#3f2e1e" opacity=".7"/><circle cx="42" cy="70" r="14" fill="#c67c44" stroke="#3f2e1e" stroke-width="2.5"/><rect x="28" y="130" width="28" height="5" rx="2.5" fill="#3f2e1e" opacity=".6"/></svg>
+            <span class="ph-label">图片占位</span>
+          </div>
+          <div class="card-body">
+            <div class="card-top"><h3 class="card-name">暖阳</h3><span class="card-tag">拍照之选</span></div>
+            <p class="card-price"><small>¥</small>4,299</p>
+            <p class="card-desc">落日金渐变配色，五千万像素镜头。黄昏时分拍下的每一帧都发着光。</p>
+          </div>
+        </article>
+
+        <article class="card reveal">
+          <div class="card-img img-4">
+            <svg viewBox="0 0 84 148"><rect x="3" y="3" width="78" height="142" rx="16" fill="#b98a5e" stroke="#3f2e1e" stroke-width="3"/><rect x="10" y="12" width="64" height="112" rx="9" fill="#cb9c6e"/><rect x="30" y="22" width="24" height="7" rx="3.5" fill="#3f2e1e" opacity=".7"/><circle cx="42" cy="70" r="14" fill="#96683c" stroke="#3f2e1e" stroke-width="2.5"/><rect x="28" y="130" width="28" height="5" rx="2.5" fill="#3f2e1e" opacity=".6"/></svg>
+            <span class="ph-label">图片占位</span>
+          </div>
+          <div class="card-body">
+            <div class="card-top"><h3 class="card-name">栗秋</h3><span class="card-tag">续航担当</span></div>
+            <p class="card-price"><small>¥</small>5,199</p>
+            <p class="card-desc">栗壳纹理机身，六千毫安大电池。从早市到晚风，电量都稳稳当当。</p>
+          </div>
+        </article>
+
+        <article class="card reveal">
+          <div class="card-img img-5">
+            <svg viewBox="0 0 84 148"><rect x="3" y="3" width="78" height="142" rx="16" fill="#a06a4c" stroke="#3f2e1e" stroke-width="3"/><rect x="10" y="12" width="64" height="112" rx="9" fill="#b57e5c"/><rect x="30" y="22" width="24" height="7" rx="3.5" fill="#3f2e1e" opacity=".7"/><circle cx="42" cy="70" r="14" fill="#7e4e33" stroke="#3f2e1e" stroke-width="2.5"/><rect x="28" y="130" width="28" height="5" rx="2.5" fill="#3f2e1e" opacity=".6"/></svg>
+            <span class="ph-label">图片占位</span>
+          </div>
+          <div class="card-body">
+            <div class="card-top"><h3 class="card-name">书岩</h3><span class="card-tag">性能旗舰</span></div>
+            <p class="card-price"><small>¥</small>6,499</p>
+            <p class="card-desc">岩石灰哑光质感，旗舰芯片加持。安静、有力，像一本厚重的书。</p>
+          </div>
+        </article>
+
+        <article class="card reveal">
+          <div class="card-img img-6">
+            <svg viewBox="0 0 84 148"><rect x="3" y="3" width="78" height="142" rx="16" fill="#efe4cb" stroke="#3f2e1e" stroke-width="3"/><rect x="10" y="12" width="64" height="112" rx="9" fill="#f8f0dd"/><rect x="30" y="22" width="24" height="7" rx="3.5" fill="#3f2e1e" opacity=".7"/><circle cx="42" cy="70" r="14" fill="#d6c49c" stroke="#3f2e1e" stroke-width="2.5"/><rect x="28" y="130" width="28" height="5" rx="2.5" fill="#3f2e1e" opacity=".6"/></svg>
+            <span class="ph-label">图片占位</span>
+          </div>
+          <div class="card-body">
+            <div class="card-top"><h3 class="card-name">月白</h3><span class="card-tag">镇店之作</span></div>
+            <p class="card-price"><small>¥</small>7,999</p>
+            <p class="card-desc">月白色陶瓷背板，手写体刻字服务。伟大的选择，值得郑重其事。</p>
+          </div>
+        </article>
+      </div>
+
+      <p class="menu-note reveal">✦ 全系支持 <b>以旧换新</b> 与 <b>两年免费贴膜</b>，到店还可领取手冲咖啡一杯 ✦</p>
+    </div>
+  </section>
+
+  <!-- 关于我们 -->
+  <section id="about">
+    <div class="wrap">
+      <div class="about-grid">
+        <div class="about-text reveal">
+          <p class="sec-eyebrow">OUR STORY · 关于我们</p>
+          <h3>一间想把「买东西」<br>变回<em>「认真选择」</em>的小店</h3>
+          <p>「伟大的手机」开在一条种满梧桐的旧街上。我们不追新机首发，只做一件事：替每一位走进来的客人，慢慢挑到那部真正合适的手机。</p>
+          <p>创始人老周修了十年手机，见过太多人为了参数买单，却用得不开心。于是有了这家店 —— 没有推销话术，只有手写的对比笔记、温热的茶，和足够耐心的一个下午。</p>
+          <div class="quote">
+            <p class="q">「伟大不在别处，就在每一次认真对待的选择里。」</p>
+            <p class="who">—— 创始人 · 周叙白</p>
+          </div>
+        </div>
+        <figure class="about-photo reveal">
+          <span class="tape" aria-hidden="true"></span>
+          <div class="ph">
+            <div class="ph-center">
+              <span class="icon">🪴</span>
+              <span class="txt">店内环境 · 图片占位</span>
+            </div>
+          </div>
+          <figcaption class="caption">老街拐角，暖灯常亮</figcaption>
+        </figure>
+      </div>
+    </div>
+  </section>
+
+  <!-- 顾客好评 -->
+  <section id="reviews">
+    <div class="wrap">
+      <div class="sec-head reveal">
+        <p class="sec-eyebrow">REVIEWS · 顾客好评</p>
+        <h2 class="sec-title">来过的朋友<span class="tilt">这样说</span></h2>
+        <p class="sec-desc">好评不是我们的目的，但每一次被认真对待后的笑容，我们都记得。</p>
+      </div>
+
+      <div class="review-cards">
+        <article class="review reveal">
+          <span class="quote-mark">”</span>
+          <div class="stars">★★★★★</div>
+          <p class="review-text">陪我妈来换手机，店员讲了整整一个小时，最后推荐的反而是便宜两千的那款。这样的店，值得跑遍半个城。</p>
+          <div class="reviewer">
+            <span class="avatar av-1">满</span>
+            <div>
+              <p class="name">林小满</p>
+              <p class="meta">购买了「暖阳」</p>
+            </div>
+          </div>
+        </article>
+
+        <article class="review reveal">
+          <span class="quote-mark">”</span>
+          <div class="stars">★★★★★</div>
+          <p class="review-text">「褐糖」用了半年，皮质背盖泛出温润的光。每周路过都想进去坐坐，喝杯咖啡聊聊新到的小玩意儿。</p>
+          <div class="reviewer">
+            <span class="avatar av-2">叙</span>
+            <div>
+              <p class="name">陈叙</p>
+              <p class="meta">购买了「褐糖」</p>
+            </div>
+          </div>
+        </article>
+
+        <article class="review reveal">
+          <span class="quote-mark">”</span>
+          <div class="stars">★★★★<span class="off">★</span></div>
+          <p class="review-text">给女儿挑了「晨雾」，店员还在背面帮她刻了名字。唯一的小遗憾：店里太舒服，一坐一下午，事情全耽误了。</p>
+          <div class="reviewer">
+            <span class="avatar av-3">禾</span>
+            <div>
+              <p class="name">阿禾</p>
+              <p class="meta">购买了「晨雾」</p>
+            </div>
+          </div>
+        </article>
+      </div>
+    </div>
+  </section>
+
+  <!-- 联系与地址 -->
+  <section id="contact">
+    <div class="wrap">
+      <div class="sec-head reveal">
+        <p class="sec-eyebrow">CONTACT · 联系与地址</p>
+        <h2 class="sec-title">来店里<span class="tilt">坐坐</span></h2>
+        <p class="sec-desc">不必急着买什么，进来喝杯茶、摸摸真机，也很好。</p>
+      </div>
+
+      <div class="contact-grid">
+        <div class="info-list">
+          <div class="info-item reveal">
+            <span class="ico">🕖</span>
+            <div>
+              <p class="label">营业时间</p>
+              <p class="val">周一至周日 <b>10:00 – 21:00</b><br>每周二下午店内整理，暂停营业</p>
+            </div>
+          </div>
+          <div class="info-item reveal">
+            <span class="ico">📍</span>
+            <div>
+              <p class="label">店铺地址</p>
+              <p class="val">梧桐街 42 号 · 老街拐角第一间<br>（地铁 3 号线「梧桐里」站 B 口，步行 5 分钟）</p>
+            </div>
+          </div>
+          <div class="info-item reveal">
+            <span class="ico">☎️</span>
+            <div>
+              <p class="label">联系电话</p>
+              <p class="val"><b>010-6666-0042</b><br>微信同号 · 添加请备注「伟大的朋友」</p>
+            </div>
+          </div>
+        </div>
+
+        <div class="map-ph reveal" aria-label="地图占位区域">
+          <div class="roads" aria-hidden="true"></div>
+          <div class="map-center">
+            <div class="map-pin" aria-hidden="true"></div>
+            <p class="txt">地图占位 · 待嵌入</p>
+            <p class="sub">后续可替换为高德 / 百度地图嵌入</p>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+</main>
+
+<footer>
+  <p class="f-brand">伟大的手机</p>
+  <p class="f-slogan">用手机，选伟大</p>
+  <div class="f-line"></div>
+  <p class="f-note">© 2026 伟大的手机工作室 · 梧桐街 42 号 · 与每一部认真挑选的手机相遇</p>
+</footer>
+
+<script>
+// 导航滚动态
+const nav = document.getElementById('nav');
+const onScroll = () => nav.classList.toggle('scrolled', window.scrollY > 30);
+window.addEventListener('scroll', onScroll, { passive: true });
+onScroll();
+
+// 滚动显现（含错落延迟）
+const io = new IntersectionObserver((entries) => {
+  entries.forEach((e) => {
+    if (e.isIntersecting) {
+      e.target.classList.add('in');
+      io.unobserve(e.target);
+    }
+  });
+}, { threshold: 0.12 });
+document.querySelectorAll('.reveal').forEach((el, i) => {
+  el.style.transitionDelay = `${(i % 3) * 90}ms`;
+  io.observe(el);
+});
+</script>
+</body>
+</html>
